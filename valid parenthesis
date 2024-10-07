@@ -1,0 +1,37 @@
+#include <stack>
+#include <string>
+
+class Solution {
+public:
+    bool isValid(std::string s) {
+        std::stack<char> st;
+        
+        // Traverse each character in the string
+        for (char ch : s) {
+            // If it's an opening bracket, push it onto the stack
+            if (ch == '(' || ch == '{' || ch == '[') {
+                st.push(ch);
+            } 
+            // If it's a closing bracket, check the stack for the matching opening bracket
+            else {
+                if (st.empty()) return false; 
+              // No opening bracket to match the closing one
+                
+                char top = st.top(); 
+              // Get the top element of the stack
+                if ((ch == ')' && top == '(') || 
+                    (ch == '}' && top == '{') || 
+                    (ch == ']' && top == '[')) {
+                    st.pop();
+                      // If a match is found, pop the stack
+                } else {
+                    return false;
+                      // a Mismatch found
+                }
+            }
+        }
+        
+        // If the stack is empty, all brackets were matched correctly
+        return st.empty();
+    }
+};
