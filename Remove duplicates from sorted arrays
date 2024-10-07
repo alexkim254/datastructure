@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+
+class Solution {
+public:
+    int removeDuplicates(std::vector<int>& nums) {
+        int numsSize = nums.size();
+        
+        if (numsSize == 0 || numsSize == 1) {
+            return numsSize; 
+          // Return size if array is empty or has only one element
+        }
+
+        int j = 0;  // Pointer for the next unique element
+
+        // Loop through the array
+        for (int i = 0; i < numsSize - 1; i++) {
+            if (nums[i] != nums[i + 1]) {
+                nums[j++] = nums[i];  
+              // Copy the unique element to the j-th position
+            }
+        }
+
+        nums[j++] = nums[numsSize - 1]; 
+      // Add the last element
+
+        return j; 
+      // Return the length of the array with unique elements
+    }
+};
