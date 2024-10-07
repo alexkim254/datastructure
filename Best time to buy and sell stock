@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+#include <climits>  // For INT_MAX
+
+class Solution {
+public:
+    int maxProfit(std::vector<int>& prices) {
+        if (prices.empty()) {
+            return 0;  // Return 0 if there are no prices
+        }
+
+        int minPrice = INT_MAX;  // Initialize to maximum possible value
+        int maxProfit = 0;       // Initialize to 0
+
+        // Loop through all the prices
+        for (int i = 0; i < prices.size(); i++) {
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];  // Update minPrice to current price if it's smaller
+            } else if (prices[i] - minPrice > maxProfit) {
+                maxProfit = prices[i] - minPrice;  // Update maxProfit if we found a higher profit
+            }
+        }
+
+        return maxProfit;  // Return the maximum profit
+    }
+};
+
+// Example usage
+int main() {
+    Solution solution;
+    std::vector<int> prices = {7, 1, 5, 3, 6, 4};
+    int result = solution.maxProfit(prices);
+    std::cout << "Maximum profit: " << result << std::endl;
+
+    return 0;
+}
